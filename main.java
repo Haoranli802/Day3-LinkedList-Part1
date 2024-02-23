@@ -103,3 +103,42 @@ class MyLinkedList {
  * obj.deleteAtIndex(index);
  */
 
+//LeetCode 206
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode pre = null;
+        ListNode cur = head;
+        ListNode next = head.next;
+        while(cur != null){
+            cur.next = pre;
+            pre = cur;
+            if(next == null) break;
+            cur = next;
+            next = next.next;
+        }
+        return cur;
+    }
+}
+// Time: O(N) Space: O(1)
+//双指针交换法
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        return reverse(null, head);
+    }
+
+    private ListNode reverse(ListNode prev, ListNode cur) {
+        if (cur == null) {
+            return prev;
+        }
+        ListNode temp = null;
+        temp = cur.next;// 先保存下一个节点
+        cur.next = prev;// 反转
+        // 更新prev、cur位置
+        // prev = cur;
+        // cur = temp;
+        return reverse(cur, temp);
+    }
+}
+// Time: O(N) Space: O(N) 递归
